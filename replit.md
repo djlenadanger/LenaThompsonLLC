@@ -1,7 +1,7 @@
 # Lena Thompson LLC - Landing Page
 
 ## Overview
-Professional landing page for Lena Thompson LLC, showcasing cybersecurity services, app development, surveillance technology, and senior-focused safe online training.
+Professional landing page for Lena Thompson LLC with a futuristic, technical, mechanical dark theme. Showcases cybersecurity services, app development, surveillance technology, and senior-focused safe online training.
 
 ## Architecture
 - **Frontend**: React + TypeScript + Tailwind CSS + shadcn/ui + Framer Motion
@@ -12,19 +12,22 @@ Professional landing page for Lena Thompson LLC, showcasing cybersecurity servic
 - `/` - Landing page with hero, services, about, credentials, and contact sections
 
 ## Design System
-- **Fonts**: Nunito (headings), Open Sans (body)
-- **Primary Color**: Teal (#0F9B8E) - HSL 174 86% 33%
-- **Text**: #1A1A2E
-- **Background**: White (#FFFFFF)
-- **Border Radius**: 10px
+- **Theme**: Dark futuristic / cyber-tech aesthetic
+- **Heading Font**: Oxanium (mechanical, futuristic)
+- **Body Font**: Space Grotesk (geometric, technical)
+- **Mono Font**: JetBrains Mono (terminal/code elements)
+- **Primary Color**: Bright cyan/teal (HSL 174 100% 42%) with glow effects
+- **Background**: Deep dark blue-black (HSL 220 20% 4%)
+- **Effects**: Grid background pattern, animated scan line, glow shadows
+- **Border Radius**: Small/sharp (0.375rem) for technical feel
 
 ## Services Highlighted
-1. Web App Security Testing
-2. Phone App Security Testing
-3. Web App Development
-4. Phone App Development
-5. Surveillance Technology (Chasing-Your-Tail-NG)
-6. Safe & Secure Online Training for Seniors (seniorconnect.app)
+1. Web App Security Testing (WEB_SEC)
+2. Phone App Security Testing (MOB_SEC)
+3. Web App Development (WEB_DEV)
+4. Phone App Development (MOB_DEV)
+5. Surveillance Technology - Chasing-Your-Tail-NG (SURV_SYS)
+6. Safe & Secure Online Training for Seniors - seniorconnect.app (SEC_EDU)
 
 ## Contact Info
 - Email: lena@lenathompsonllc.com
