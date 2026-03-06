@@ -25,7 +25,8 @@ import {
   Crosshair,
   Zap,
 } from "lucide-react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -87,6 +88,56 @@ function Navbar() {
         </Button>
       </div>
     </nav>
+  );
+}
+
+function HeroPortrait() {
+  const [showPhoto, setShowPhoto] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowPhoto(true), 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <div className="relative">
+      <div className="w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-md border border-primary/30 relative" style={{ boxShadow: "var(--glow-primary)" }} data-testid="img-lena-portrait">
+        <div className="absolute inset-0 rounded-md bg-card flex items-center justify-center">
+          <motion.span
+            className="font-heading text-5xl sm:text-6xl font-bold text-primary"
+            style={{ textShadow: "0 0 30px hsl(174 100% 42% / 0.4)" }}
+            animate={showPhoto ? { opacity: 0 } : { opacity: 1 }}
+            transition={{ duration: 0.6 }}
+          >
+            LT
+          </motion.span>
+        </div>
+        <AnimatePresence>
+          {showPhoto && (
+            <motion.div
+              className="absolute inset-0 rounded-md"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8 }}
+            >
+              <Avatar className="w-full h-full rounded-md">
+                <AvatarImage src={lenaPhoto} alt="Lena Thompson" className="object-cover" />
+                <AvatarFallback className="text-5xl font-heading rounded-md bg-card text-primary">LT</AvatarFallback>
+              </Avatar>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      <div className="absolute top-2 left-2 flex items-center gap-1.5 bg-background/80 backdrop-blur-sm px-2 py-1 rounded-sm border border-primary/20 z-10">
+        <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+        <span className="font-mono text-[10px] text-primary tracking-wider">VERIFIED</span>
+      </div>
+
+      <div className="absolute -bottom-3 -right-3 bg-card border border-primary/30 rounded-sm px-3 py-1.5 z-10" style={{ boxShadow: "var(--glow-primary)" }} data-testid="badge-sans-certified">
+        <span className="font-mono text-xs text-primary tracking-wider font-bold">SANS_CERTIFIED</span>
+      </div>
+    </div>
   );
 }
 
@@ -157,21 +208,7 @@ function HeroSection() {
               <div className="absolute -inset-8 border border-primary/5 rounded-md" />
               <div className="absolute inset-0 bg-gradient-to-br from-primary/15 to-transparent rounded-md blur-2xl scale-110" />
 
-              <div className="relative">
-                <Avatar className="w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-md border border-primary/30" style={{ boxShadow: "var(--glow-primary)" }} data-testid="img-lena-portrait">
-                  <AvatarImage src={lenaPhoto} alt="Lena Thompson" className="object-cover" />
-                  <AvatarFallback className="text-4xl font-heading rounded-md bg-card">LT</AvatarFallback>
-                </Avatar>
-
-                <div className="absolute top-2 left-2 flex items-center gap-1.5 bg-background/80 backdrop-blur-sm px-2 py-1 rounded-sm border border-primary/20">
-                  <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                  <span className="font-mono text-[10px] text-primary tracking-wider">VERIFIED</span>
-                </div>
-
-                <div className="absolute -bottom-3 -right-3 bg-card border border-primary/30 rounded-sm px-3 py-1.5" style={{ boxShadow: "var(--glow-primary)" }} data-testid="badge-sans-certified">
-                  <span className="font-mono text-xs text-primary tracking-wider font-bold">SANS_CERTIFIED</span>
-                </div>
-              </div>
+              <HeroPortrait />
 
               <div className="absolute -top-2 -right-2 font-mono text-[9px] text-primary/30 tracking-wider">
                 [01]
