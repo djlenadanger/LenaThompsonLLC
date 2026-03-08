@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="64" height="64" rx="8" fill="#0a0c14"/>
+  <rect x="2" y="2" width="60" height="60" rx="7" fill="none" stroke="#00d4a4" stroke-width="1.5" opacity="0.6"/>
+  <text x="32" y="44" font-family="monospace, sans-serif" font-size="28" font-weight="700" fill="#00d4a4" text-anchor="middle" filter="url(#glow)" letter-spacing="-1">LT</text>
+  <line x1="8" y1="54" x2="56" y2="54" stroke="#00d4a4" stroke-width="1" opacity="0.4"/>
+</svg>
