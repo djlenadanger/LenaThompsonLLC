@@ -590,7 +590,7 @@ function ContactSection() {
                 </a>
               </Button>
               <Button variant="outline" className="border-primary/30" asChild data-testid="button-github">
-                <a href="https://djlenadanger.github.io" target="_blank" rel="noopener noreferrer" className="font-mono text-xs tracking-wider">
+                <a href="https://github.com/djlenadanger" target="_blank" rel="noopener noreferrer" className="font-mono text-xs tracking-wider">
                   <BookOpen className="w-4 h-4 mr-2" />
                   PORTFOLIO
                 </a>
