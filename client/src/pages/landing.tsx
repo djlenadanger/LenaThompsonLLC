@@ -402,7 +402,7 @@ function AboutSection() {
                 My approach to security is shaped by real-world problem-solving: cross-functional teams using the DMAIC framework, authored technical service bulletins, and earned a Six Sigma Black Belt at Ford. That same rigor now powers how I identify and remediate vulnerabilities.
               </p>
               <p>
-                Based in Cheboygan, Michigan — a unique mix of technical depth and practical ingenuity. When I'm not securing networks or building apps, I'm working on my lawn tractor. Fixing things is what I do.
+                Based in a Rivertown in Northern, MI — a unique mix of technical depth and practical ingenuity. When I'm not securing networks or building apps, I'm working on my lawn tractor. Fixing things is what I do.
               </p>
             </div>
 
