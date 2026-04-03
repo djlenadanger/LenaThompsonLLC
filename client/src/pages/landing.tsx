@@ -517,6 +517,28 @@ function CredentialsSection() {
 }
 
 function BookingSection() {
+  useEffect(() => {
+    const initWidget = () => {
+      const el = document.querySelector(".calendly-inline-widget");
+      if (el && (window as any).Calendly) {
+        (window as any).Calendly.initInlineWidget({
+          url: "https://calendly.com/d/y7b-8kp-5sy/initial-consultation-call?background_color=0a0c14&text_color=c8d0e0&primary_color=00d4a4",
+          parentElement: el,
+        });
+      }
+    };
+
+    if ((window as any).Calendly) {
+      initWidget();
+    } else {
+      const script = document.querySelector('script[src*="calendly"]');
+      if (script) {
+        script.addEventListener("load", initWidget);
+        return () => script.removeEventListener("load", initWidget);
+      }
+    }
+  }, []);
+
   return (
     <section id="booking" className="py-24 border-t border-primary/10" data-testid="section-booking">
       <div className="max-w-6xl mx-auto px-6">
@@ -546,7 +568,6 @@ function BookingSection() {
             >
               <div
                 className="calendly-inline-widget w-full"
-                data-url="https://calendly.com/d/y7b-8kp-5sy/initial-consultation-call?background_color=0a0c14&text_color=c8d0e0&primary_color=00d4a4"
                 style={{ minWidth: "320px", height: "700px" }}
                 data-testid="widget-calendly"
               />
