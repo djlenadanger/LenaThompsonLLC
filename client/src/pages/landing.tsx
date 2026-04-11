@@ -81,6 +81,7 @@ function Navbar() {
           <a href="#services" className="px-3 py-1.5 text-muted-foreground rounded-sm" data-testid="link-services">_SERVICES</a>
           <a href="#about" className="px-3 py-1.5 text-muted-foreground rounded-sm" data-testid="link-about">_ABOUT</a>
           <a href="#credentials" className="px-3 py-1.5 text-muted-foreground rounded-sm" data-testid="link-credentials">_CREDS</a>
+          <a href="#booking" className="px-3 py-1.5 text-muted-foreground rounded-sm" data-testid="link-booking">_SCHEDULE</a>
           <a href="#contact" className="px-3 py-1.5 text-muted-foreground rounded-sm" data-testid="link-contact">_CONTACT</a>
         </div>
         <Button size="sm" asChild data-testid="button-get-in-touch">
@@ -515,6 +516,69 @@ function CredentialsSection() {
   );
 }
 
+function BookingSection() {
+  useEffect(() => {
+    const initWidget = () => {
+      const el = document.querySelector(".calendly-inline-widget");
+      if (el && (window as any).Calendly) {
+        (window as any).Calendly.initInlineWidget({
+          url: "https://calendly.com/d/y7b-8kp-5sy/initial-consultation-call?background_color=0a0c14&text_color=c8d0e0&primary_color=00d4a4",
+          parentElement: el,
+        });
+      }
+    };
+
+    if ((window as any).Calendly) {
+      initWidget();
+    } else {
+      const script = document.querySelector('script[src*="calendly"]');
+      if (script) {
+        script.addEventListener("load", initWidget);
+        return () => script.removeEventListener("load", initWidget);
+      }
+    }
+  }, []);
+
+  return (
+    <section id="booking" className="py-24 border-t border-primary/10" data-testid="section-booking">
+      <div className="max-w-6xl mx-auto px-6">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={stagger}
+        >
+          <motion.div variants={fadeUp} className="mb-10">
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+              <div className="h-px flex-1 max-w-12 bg-primary/30" />
+              <span className="font-mono text-xs text-primary tracking-widest">04.5 // SCHEDULE</span>
+            </div>
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
+              Book a Free Consultation
+            </h2>
+            <p className="mt-4 text-muted-foreground text-base max-w-xl">
+              30 minutes, no pressure. Let's talk about your security needs or project goals.
+            </p>
+          </motion.div>
+
+          <motion.div variants={fadeUp}>
+            <div
+              className="rounded-sm border border-primary/10 overflow-hidden"
+              style={{ boxShadow: "var(--glow-primary)" }}
+            >
+              <div
+                className="calendly-inline-widget w-full"
+                style={{ minWidth: "320px", height: "700px" }}
+                data-testid="widget-calendly"
+              />
+            </div>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 function ContactSection() {
   return (
     <section id="contact" className="py-24" data-testid="section-contact">
@@ -589,6 +653,12 @@ function ContactSection() {
                   SEND_MESSAGE
                 </a>
               </Button>
+              <Button variant="outline" className="border-primary/30" asChild data-testid="button-book-call">
+                <a href="#booking" className="font-mono text-xs tracking-wider">
+                  <Zap className="w-4 h-4 mr-2" />
+                  BOOK_FREE_CALL
+                </a>
+              </Button>
               <Button variant="outline" className="border-primary/30" asChild data-testid="button-github">
                 <a href="https://github.com/djlenadanger" target="_blank" rel="noopener noreferrer" className="font-mono text-xs tracking-wider">
                   <BookOpen className="w-4 h-4 mr-2" />
@@ -636,6 +706,7 @@ export default function Landing() {
       <ServicesSection />
       <AboutSection />
       <CredentialsSection />
+      <BookingSection />
       <ContactSection />
       <Footer />
     </div>
