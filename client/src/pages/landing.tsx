@@ -24,6 +24,7 @@ import {
   Network,
   Crosshair,
   Zap,
+  PenLine,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -81,6 +82,7 @@ function Navbar() {
           <a href="#services" className="px-3 py-1.5 text-muted-foreground rounded-sm" data-testid="link-services">_SERVICES</a>
           <a href="#about" className="px-3 py-1.5 text-muted-foreground rounded-sm" data-testid="link-about">_ABOUT</a>
           <a href="#credentials" className="px-3 py-1.5 text-muted-foreground rounded-sm" data-testid="link-credentials">_CREDS</a>
+          <a href="#work" className="px-3 py-1.5 text-muted-foreground rounded-sm" data-testid="link-work">_WORK</a>
           <a href="#booking" className="px-3 py-1.5 text-muted-foreground rounded-sm" data-testid="link-booking">_SCHEDULE</a>
           <a href="#contact" className="px-3 py-1.5 text-muted-foreground rounded-sm" data-testid="link-contact">_CONTACT</a>
         </div>
@@ -516,6 +518,298 @@ function CredentialsSection() {
   );
 }
 
+const accentColors: Record<string, string> = {
+  amber: "#e8a820",
+  teal: "hsl(174 100% 42%)",
+  coral: "#e8785a",
+  blue: "#5a9de8",
+  purple: "#9b87e8",
+  green: "#7ac96a",
+};
+
+const tagStyles: Record<string, { bg: string; color: string }> = {
+  amber:  { bg: "rgba(232,168,32,0.1)",   color: "#e8a820" },
+  teal:   { bg: "rgba(0,212,164,0.1)",    color: "hsl(174 100% 42%)" },
+  coral:  { bg: "rgba(232,120,90,0.1)",   color: "#e8785a" },
+  blue:   { bg: "rgba(90,157,232,0.1)",   color: "#5a9de8" },
+  purple: { bg: "rgba(155,135,232,0.1)",  color: "#9b87e8" },
+  green:  { bg: "rgba(122,201,106,0.1)",  color: "#7ac96a" },
+};
+
+const statusStyles: Record<string, { bg: string; color: string }> = {
+  Active:   { bg: "rgba(232,168,32,0.1)",  color: "#e8a820" },
+  Building: { bg: "rgba(0,212,164,0.1)",   color: "hsl(174 100% 42%)" },
+  Ongoing:  { bg: "rgba(155,135,232,0.1)", color: "#9b87e8" },
+  Shipped:  { bg: "rgba(122,201,106,0.1)", color: "#7ac96a" },
+};
+
+const activityLog = [
+  {
+    day: "Today",
+    date: "Apr 11",
+    year: "2026",
+    title: "Tailscale Exit Node configured",
+    tags: [
+      { label: "Networking", color: "amber" },
+      { label: "Infrastructure", color: "teal" },
+    ],
+    detail: "Set up an exit node for secure remote access — next step: deploy on the Raspberry Pi surveillance build.",
+  },
+  {
+    day: "Yesterday",
+    date: "Apr 10",
+    year: "2026",
+    title: "MDP Spring Convention 2026 site launched",
+    link: "https://mdp-spring-convention-2026.replit.app",
+    tags: [
+      { label: "Web Dev", color: "blue" },
+      { label: "Shipped", color: "green" },
+    ],
+    detail: "Built and deployed a full convention site on Replit. Approved by the chair — live and shareable.",
+  },
+  {
+    day: "Recent",
+    date: "Apr 2026",
+    year: "",
+    title: "seniorconnect.app migrated to Hostinger VPS",
+    tags: [
+      { label: "Cloud", color: "amber" },
+      { label: "Security", color: "coral" },
+    ],
+    detail: "Moved production app from shared hosting to a self-managed VPS. Full deployment + configuration ownership.",
+  },
+  {
+    day: "Published",
+    date: "Mar 2026",
+    year: "",
+    title: 'Substack: "Breaking Things on Purpose"',
+    tags: [{ label: "Writing", color: "purple" }],
+    detail: "First article in my security + development series. Documenting the real process of building and breaking things intentionally.",
+  },
+];
+
+const activeProjects = [
+  {
+    title: "seniorconnect.app security audit",
+    status: "Active",
+    color: "coral",
+    desc: "Testing 20 vulnerabilities using Kali Linux on a VPS. Documenting every step as security research content.",
+    progress: 15,
+    progressLabel: "3 / 20 vulns tested",
+  },
+  {
+    title: "Raspberry Pi surveillance system",
+    status: "Building",
+    color: "teal",
+    desc: "Multi-month hardware + software build. Planning Tailscale integration for secure remote access. Full build log incoming.",
+    progress: 10,
+    progressLabel: "Phase 1 of 5 — networking layer",
+  },
+  {
+    title: "PortSwigger Web Security labs",
+    status: "Active",
+    color: "blue",
+    desc: "Working through the apprentice track. 11 labs remaining — findings will feed into Substack and content library.",
+    progress: 55,
+    progressLabel: "11 labs remaining",
+  },
+  {
+    title: "Safe & Secure Online webinar series",
+    status: "Building",
+    color: "purple",
+    desc: "Designing practical digital safety workshops for seniors. Covers phishing, passwords, privacy, and safe browsing.",
+  },
+  {
+    title: "LLC site + resume update",
+    status: "Active",
+    color: "amber",
+    desc: "Adding Design & Development and Cloud Management to reflect VPS work, app deployment, and recent projects.",
+  },
+  {
+    title: "djslradio.com media refresh",
+    status: "Ongoing",
+    color: "green",
+    desc: "Updating media assets and files via FTP. Keeping the site current between larger projects.",
+  },
+];
+
+function WorkingSection() {
+  return (
+    <section id="work" className="py-24 relative border-t border-primary/10" data-testid="section-work">
+      <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.02] via-transparent to-transparent" />
+      <div className="relative max-w-6xl mx-auto px-6">
+        <motion.div
+          className="mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeUp}
+        >
+          <div className="flex flex-wrap items-center gap-3 mb-4">
+            <div className="h-px flex-1 max-w-12 bg-primary/30" />
+            <span className="font-mono text-xs text-primary tracking-widest">04.2 // WORK_LOG</span>
+          </div>
+          <div className="flex flex-wrap items-center gap-3 mb-2">
+            <div className="flex items-center gap-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+              <span className="font-mono text-[10px] text-primary/60 tracking-widest">LIVE_SNAPSHOT</span>
+            </div>
+          </div>
+          <h2 className="font-heading text-3xl sm:text-4xl font-bold tracking-tight text-foreground" data-testid="text-work-heading">
+            What I'm Working On
+          </h2>
+          <p className="mt-4 text-muted-foreground max-w-2xl text-base">
+            A live snapshot of active projects — from infrastructure and security research to web builds and community education.
+          </p>
+        </motion.div>
+
+        {/* Activity Log */}
+        <motion.div
+          className="mb-14"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeUp}
+        >
+          <p className="font-mono text-[10px] text-primary/40 tracking-widest mb-4">// RECENT_ACTIVITY</p>
+          <div className="rounded-sm border border-primary/10 overflow-hidden" data-testid="activity-log">
+            {activityLog.map((item, i) => (
+              <div
+                key={i}
+                className="grid border-b border-primary/10 last:border-b-0 hover:bg-primary/[0.02] transition-colors"
+                style={{ gridTemplateColumns: "88px 1fr" }}
+                data-testid={`activity-item-${i}`}
+              >
+                <div className="border-r border-primary/10 px-3 py-4 flex flex-col gap-0.5">
+                  <span className="font-mono text-[11px] font-medium" style={{ color: accentColors.amber }}>{item.day}</span>
+                  <span className="font-mono text-[10px] text-muted-foreground/60">{item.date}</span>
+                  {item.year && <span className="font-mono text-[10px] text-muted-foreground/40">{item.year}</span>}
+                </div>
+                <div className="px-4 py-4">
+                  <div className="text-sm font-medium text-foreground mb-1.5 leading-snug">
+                    {item.link ? (
+                      <a
+                        href={item.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 hover:text-primary transition-colors"
+                        data-testid={`link-activity-${i}`}
+                      >
+                        {item.title}
+                        <ExternalLink className="w-3 h-3 opacity-60" />
+                      </a>
+                    ) : (
+                      item.title
+                    )}
+                  </div>
+                  <div className="flex flex-wrap items-center gap-1.5 mb-1.5">
+                    {item.tags.map((tag) => (
+                      <span
+                        key={tag.label}
+                        className="font-mono text-[10px] px-2 py-0.5 rounded-full font-medium"
+                        style={{ background: tagStyles[tag.color].bg, color: tagStyles[tag.color].color }}
+                      >
+                        {tag.label}
+                      </span>
+                    ))}
+                  </div>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{item.detail}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Project Grid */}
+        <motion.div
+          className="mb-12"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={stagger}
+        >
+          <p className="font-mono text-[10px] text-primary/40 tracking-widest mb-4">// ACTIVE_TRACKS</p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {activeProjects.map((project, i) => (
+              <motion.div key={project.title} variants={fadeUp}>
+                <Card
+                  className="p-4 h-full flex flex-col gap-2 border-primary/10 hover-elevate relative overflow-hidden"
+                  data-testid={`card-project-${i}`}
+                  style={{ paddingLeft: "calc(1rem + 3px)" }}
+                >
+                  <div
+                    className="absolute left-0 top-0 bottom-0 w-[3px]"
+                    style={{ background: accentColors[project.color] }}
+                  />
+                  <div className="flex items-start justify-between gap-2">
+                    <h3 className="font-heading font-semibold text-sm leading-snug flex-1">{project.title}</h3>
+                    <span
+                      className="font-mono text-[9px] tracking-wider px-2 py-0.5 rounded-full flex-shrink-0 uppercase"
+                      style={{ background: statusStyles[project.status].bg, color: statusStyles[project.status].color }}
+                    >
+                      {project.status}
+                    </span>
+                  </div>
+                  <p className="text-xs text-muted-foreground leading-relaxed flex-1">{project.desc}</p>
+                  {project.progress !== undefined && (
+                    <div className="mt-1">
+                      <div className="h-[2px] bg-primary/10 rounded-full overflow-hidden">
+                        <div
+                          className="h-full rounded-full transition-all"
+                          style={{ width: `${project.progress}%`, background: accentColors[project.color] }}
+                        />
+                      </div>
+                      <p className="font-mono text-[10px] text-muted-foreground/50 mt-1">{project.progressLabel}</p>
+                    </div>
+                  )}
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Substack Callout */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+        >
+          <div
+            className="flex items-start gap-4 rounded-sm border border-primary/10 p-5"
+            style={{ background: "hsl(174 100% 42% / 0.03)" }}
+            data-testid="callout-substack"
+          >
+            <div
+              className="w-9 h-9 rounded-sm border border-primary/20 flex items-center justify-center flex-shrink-0"
+              style={{ boxShadow: "var(--glow-primary)" }}
+            >
+              <PenLine className="w-4 h-4 text-primary" />
+            </div>
+            <div>
+              <p className="font-heading font-semibold text-sm mb-1">I write about all of this</p>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                Security research, building in public, and making tech accessible —
+                follow{" "}
+                <a
+                  href="https://substack.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline font-mono"
+                  data-testid="link-substack"
+                >
+                  Breaking Things on Purpose on Substack
+                </a>{" "}
+                for the full documentation as it happens.
+              </p>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 function BookingSection() {
   useEffect(() => {
     const initWidget = () => {
@@ -706,6 +1000,7 @@ export default function Landing() {
       <ServicesSection />
       <AboutSection />
       <CredentialsSection />
+      <WorkingSection />
       <BookingSection />
       <ContactSection />
       <Footer />
