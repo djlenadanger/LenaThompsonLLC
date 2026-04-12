@@ -792,13 +792,13 @@ function WorkingSection() {
                 Security research, building in public, and making tech accessible —
                 follow{" "}
                 <a
-                  href="https://substack.com"
+                  href="https://djlena.substack.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary hover:underline font-mono"
                   data-testid="link-substack"
                 >
-                  Breaking Things on Purpose on Substack
+                  Wisdom & Mischief on Substack
                 </a>{" "}
                 for the full documentation as it happens.
               </p>
