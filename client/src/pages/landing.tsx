@@ -25,6 +25,7 @@ import {
   Crosshair,
   Zap,
   PenLine,
+  Check,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -80,6 +81,7 @@ function Navbar() {
         </a>
         <div className="hidden md:flex items-center gap-1 text-xs font-mono tracking-wider">
           <a href="#services" className="px-3 py-1.5 text-muted-foreground rounded-sm" data-testid="link-services">_SERVICES</a>
+          <a href="#pricing" className="px-3 py-1.5 text-muted-foreground rounded-sm" data-testid="link-pricing">_PRICING</a>
           <a href="#about" className="px-3 py-1.5 text-muted-foreground rounded-sm" data-testid="link-about">_ABOUT</a>
           <a href="#credentials" className="px-3 py-1.5 text-muted-foreground rounded-sm" data-testid="link-credentials">_CREDS</a>
           <a href="#work" className="px-3 py-1.5 text-muted-foreground rounded-sm" data-testid="link-work">_WORK</a>
@@ -511,6 +513,213 @@ function CredentialsSection() {
                 {skill}
               </Badge>
             ))}
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+const pricingBadgeStyles: Record<string, { bg: string; color: string }> = {
+  teal:   { bg: "rgba(0,212,164,0.12)",   color: "hsl(174 100% 42%)" },
+  blue:   { bg: "rgba(90,157,232,0.12)",  color: "#5a9de8" },
+  purple: { bg: "rgba(155,135,232,0.12)", color: "#9b87e8" },
+};
+
+const pricingFeaturedBorder: Record<string, string> = {
+  teal:   "hsl(174 100% 42%)",
+  purple: "#9b87e8",
+};
+
+const pricingCategories = [
+  {
+    label: "Web & App Security Testing",
+    code: "SEC_TESTING",
+    note: "Small and mid-size business focus. No corporate jargon. Real findings, plain-English reports, and fixes you can actually act on.",
+    packages: [
+      {
+        badge: "Starter", badgeColor: "teal",
+        name: "Quick Scan", price: "$350", sub: "one-time / per site",
+        featured: null,
+        items: ["External surface reconnaissance", "Top 10 OWASP check (manual + tool)", "1–2 page plain-English report", "Priority fix list", "Turnaround: 5–7 business days"],
+      },
+      {
+        badge: "Most Popular", badgeColor: "teal",
+        name: "Web App Pentest", price: "$750 – $1,200", sub: "scoped by complexity",
+        featured: "teal",
+        items: ["Full manual OWASP Top 10 testing", "Auth, session & input fuzzing", "Burp Suite active scan", "Shodan/OSINT recon", "Detailed findings report + CVSS scores", "30-min debrief call included", "Turnaround: 10–14 business days"],
+      },
+      {
+        badge: "Pro", badgeColor: "blue",
+        name: "Ongoing Monitoring", price: "$400 / mo", sub: "3-month minimum",
+        featured: null,
+        items: ["Monthly vuln scan + delta report", "Shodan IP monitoring alerts", "Quarterly pentest lite", "Async Q&A support", "Perfect for post-fix peace of mind"],
+      },
+    ],
+  },
+  {
+    label: "Vulnerability Assessment & Training",
+    code: "VULN_TRAIN",
+    note: null,
+    packages: [
+      {
+        badge: "Assessment", badgeColor: "teal",
+        name: "Network Recon + Report", price: "$500", sub: "flat rate / small business",
+        featured: null,
+        items: ["Exposed asset discovery via Shodan", "Open port / service fingerprinting", "CVE mapping for found services", "Actionable remediation report"],
+      },
+      {
+        badge: "Training", badgeColor: "blue",
+        name: "Security Awareness Training", price: "$150 / hr", sub: "or $500 flat / team session",
+        featured: null,
+        items: ["Phishing recognition & simulation", "Password hygiene + MFA setup", "Tailored to your team's risk level", "Based on real Mastercard SOC work"],
+      },
+    ],
+  },
+  {
+    label: "Web Design",
+    code: "WEB_DESIGN",
+    note: "Clean, functional sites built for small businesses, consultants, and service providers. Fast, professional, and built to convert.",
+    packages: [
+      {
+        badge: "Starter", badgeColor: "purple",
+        name: "Landing Page", price: "$500 – $800", sub: "single page",
+        featured: null,
+        items: ["Custom design (no cookie-cutter templates)", "Mobile-responsive", "Contact form + basic SEO", "2 rounds of revisions", "Delivered in 2 weeks"],
+      },
+      {
+        badge: "Most Popular", badgeColor: "purple",
+        name: "Business Site", price: "$1,200 – $2,000", sub: "5–8 pages",
+        featured: "purple",
+        items: ["Home, About, Services, Contact + more", "Mobile-first design", "Basic CMS so you can update copy", "Google Analytics setup", "3 rounds of revisions", "Delivered in 3–4 weeks"],
+      },
+      {
+        badge: "Add-on", badgeColor: "purple",
+        name: "Security Audit Add-on", price: "+$300", sub: "on any web design project",
+        featured: null,
+        items: ["Security check built into the launch", "HTTPS + headers configured", "Plugin/dependency review", "Rare value: designer who also pentests"],
+      },
+    ],
+  },
+];
+
+function PricingSection() {
+  return (
+    <section id="pricing" className="py-24 relative border-t border-primary/10" data-testid="section-pricing">
+      <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.02] via-transparent to-transparent" />
+      <div className="relative max-w-6xl mx-auto px-6">
+        <motion.div
+          className="mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeUp}
+        >
+          <div className="flex flex-wrap items-center gap-3 mb-4">
+            <div className="h-px flex-1 max-w-12 bg-primary/30" />
+            <span className="font-mono text-xs text-primary tracking-widest">02.5 // PACKAGES</span>
+          </div>
+          <h2 className="font-heading text-3xl sm:text-4xl font-bold tracking-tight text-foreground" data-testid="text-pricing-heading">
+            Services & Pricing
+          </h2>
+          <p className="mt-4 text-muted-foreground max-w-2xl text-base">
+            Transparent, flat-rate pricing for small and mid-size businesses. Every project starts with a free 20-minute discovery call.
+          </p>
+        </motion.div>
+
+        <div className="space-y-14">
+          {pricingCategories.map((category, ci) => (
+            <motion.div
+              key={category.code}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={stagger}
+            >
+              <motion.div variants={fadeUp} className="mb-6">
+                <div className="flex flex-wrap items-center gap-3 mb-2">
+                  <span className="font-mono text-[10px] text-primary/40 tracking-widest">// {category.code}</span>
+                </div>
+                <h3 className="font-heading text-xl font-bold text-foreground" data-testid={`text-pricing-category-${ci}`}>{category.label}</h3>
+                {category.note && (
+                  <p className="mt-1.5 text-sm text-muted-foreground max-w-2xl">{category.note}</p>
+                )}
+              </motion.div>
+
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {category.packages.map((pkg, pi) => (
+                  <motion.div key={pkg.name} variants={fadeUp}>
+                    <Card
+                      className="p-5 h-full flex flex-col gap-3 hover-elevate"
+                      style={pkg.featured ? {
+                        borderColor: pricingFeaturedBorder[pkg.featured],
+                        borderWidth: "1.5px",
+                        boxShadow: `0 0 20px ${pricingFeaturedBorder[pkg.featured]}22`,
+                      } : { borderColor: "hsl(174 100% 42% / 0.1)" }}
+                      data-testid={`card-pkg-${ci}-${pi}`}
+                    >
+                      <div>
+                        <span
+                          className="font-mono text-[10px] font-semibold px-2 py-0.5 rounded-full tracking-wider"
+                          style={{ background: pricingBadgeStyles[pkg.badgeColor].bg, color: pricingBadgeStyles[pkg.badgeColor].color }}
+                        >
+                          {pkg.badge}
+                        </span>
+                      </div>
+                      <div>
+                        <h4 className="font-heading font-bold text-base mb-0.5">{pkg.name}</h4>
+                        <div className="font-heading text-2xl font-bold text-foreground leading-tight">{pkg.price}</div>
+                        <div className="font-mono text-[11px] text-muted-foreground/60 mt-0.5">{pkg.sub}</div>
+                      </div>
+                      <ul className="flex flex-col gap-2 flex-1 mt-1">
+                        {pkg.items.map((item) => (
+                          <li key={item} className="flex items-start gap-2 text-xs text-muted-foreground leading-snug">
+                            <Check className="w-3.5 h-3.5 text-primary flex-shrink-0 mt-0.5" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
+
+              {ci < pricingCategories.length - 1 && (
+                <div className="mt-12 h-px bg-primary/10" />
+              )}
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Footer note */}
+        <motion.div
+          className="mt-14"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+        >
+          <div
+            className="rounded-sm border border-primary/10 p-5 text-sm text-muted-foreground leading-relaxed"
+            style={{ background: "hsl(174 100% 42% / 0.03)" }}
+            data-testid="pricing-footer-note"
+          >
+            <span className="text-foreground font-semibold">How to work with me:</span>{" "}
+            All projects start with a free 20-minute discovery call. I work fully remote. Payment is 50% upfront, 50% on delivery. Small businesses get real attention — no outsourcing, no interns.
+          </div>
+          <div className="flex flex-wrap gap-3 mt-4">
+            <Button asChild data-testid="button-pricing-email">
+              <a href="mailto:lena@lenathompsonllc.com" className="font-mono text-xs tracking-wider">
+                <Mail className="w-4 h-4 mr-2" />
+                EMAIL_LENA
+              </a>
+            </Button>
+            <Button variant="outline" className="border-primary/30" asChild data-testid="button-pricing-book">
+              <a href="#booking" className="font-mono text-xs tracking-wider">
+                <Zap className="w-4 h-4 mr-2" />
+                BOOK_FREE_CALL
+              </a>
+            </Button>
           </div>
         </motion.div>
       </div>
@@ -998,6 +1207,7 @@ export default function Landing() {
       <Navbar />
       <HeroSection />
       <ServicesSection />
+      <PricingSection />
       <AboutSection />
       <CredentialsSection />
       <WorkingSection />
