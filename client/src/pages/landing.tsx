@@ -547,7 +547,7 @@ const pricingCategories = [
         badge: "Most Popular", badgeColor: "teal",
         name: "Web App Pentest", price: "$750 – $1,200", sub: "scoped by complexity",
         featured: "teal",
-        items: ["Full manual OWASP Top 10 testing", "Auth, session & input fuzzing", "Burp Suite active scan", "Shodan/OSINT recon", "Detailed findings report + CVSS scores", "30-min debrief call included", "Turnaround: 10–14 business days"],
+        items: ["Full manual OWASP Top 10 testing", "Auth, session & input fuzzing", "Burp Suite active scan", "Shodan/OSINT recon", "Detailed findings report + CVSS scores", "20-min debrief call included", "Turnaround: 10–14 business days"],
       },
       {
         badge: "Pro", badgeColor: "blue",
@@ -1060,7 +1060,7 @@ function BookingSection() {
               Book a Free Consultation
             </h2>
             <p className="mt-4 text-muted-foreground text-base max-w-xl">
-              30 minutes, no pressure. Let's talk about your security needs or project goals.
+              20 minutes, no pressure. Let's talk about your security needs or project goals.
             </p>
           </motion.div>
 
