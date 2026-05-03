@@ -26,6 +26,7 @@ import {
   Zap,
   PenLine,
   Check,
+  Radio,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -1176,6 +1177,65 @@ function ContactSection() {
   );
 }
 
+function RadioSection() {
+  return (
+    <section id="radio" className="py-16 border-t border-primary/10" data-testid="section-radio">
+      <div className="max-w-6xl mx-auto px-6">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          variants={fadeUp}
+        >
+          <div className="flex flex-wrap items-center gap-3 mb-5">
+            <div className="flex items-center gap-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+              <span className="font-mono text-[10px] text-primary/60 tracking-widest">LIVE_STREAM</span>
+            </div>
+          </div>
+          <div className="flex flex-wrap items-start gap-4 mb-6">
+            <div
+              className="w-10 h-10 rounded-sm border border-primary/30 flex items-center justify-center flex-shrink-0"
+              style={{ boxShadow: "var(--glow-primary)" }}
+            >
+              <Radio className="w-4 h-4 text-primary" />
+            </div>
+            <div>
+              <h2 className="font-heading text-xl font-bold text-foreground">DJ Lena — House of House</h2>
+              <p className="text-sm text-muted-foreground mt-0.5">
+                Internet radio broadcasting live on TuneIn.{" "}
+                <a
+                  href="https://tunein.com/radio/DJ-Lena-House-of-House-s224423/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary font-mono text-xs hover:underline"
+                  data-testid="link-tunein-full"
+                >
+                  Open in TuneIn ↗
+                </a>
+              </p>
+            </div>
+          </div>
+          <div
+            className="rounded-sm border border-primary/10 overflow-hidden"
+            style={{ boxShadow: "var(--glow-primary)" }}
+            data-testid="widget-radio"
+          >
+            <iframe
+              src="https://tunein.com/embed/player/s224423/"
+              style={{ width: "100%", height: "100px" }}
+              scrolling="no"
+              frameBorder="no"
+              title="DJ Lena — House of House on TuneIn"
+              allow="autoplay"
+            />
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 function Footer() {
   return (
     <footer className="border-t border-primary/10 py-8" data-testid="footer">
@@ -1213,6 +1273,7 @@ export default function Landing() {
       <WorkingSection />
       <BookingSection />
       <ContactSection />
+      <RadioSection />
       <Footer />
     </div>
   );
