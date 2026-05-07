@@ -1123,7 +1123,7 @@ function ContactSection() {
                 </a>
 
                 <a
-                  href="tel:313-282-4396"
+                  href="tel:313-389-6249"
                   className="flex flex-col items-center gap-2 rounded-sm p-3 hover-elevate"
                   data-testid="link-phone"
                 >
@@ -1131,7 +1131,7 @@ function ContactSection() {
                     <Phone className="w-4 h-4 text-primary" />
                   </div>
                   <span className="text-xs font-heading font-semibold" data-testid="text-phone-label">Phone</span>
-                  <span className="text-[11px] text-muted-foreground font-mono" data-testid="text-phone-value">313-282-4396</span>
+                  <span className="text-[11px] text-muted-foreground font-mono" data-testid="text-phone-value">313-389-6249</span>
                 </a>
 
                 <a
