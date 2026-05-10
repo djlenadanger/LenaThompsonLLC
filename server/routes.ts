@@ -16,5 +16,14 @@ export async function registerRoutes(
     res.sendFile(servicesFile);
   });
 
+  // Serve the work log page at /work_log
+  app.get("/work_log", (req, res) => {
+    const workLogFile =
+      process.env.NODE_ENV === "production"
+        ? path.join(process.cwd(), "dist/public/work_log.html")
+        : path.join(process.cwd(), "client/public/work_log.html");
+    res.sendFile(workLogFile);
+  });
+
   return httpServer;
 }

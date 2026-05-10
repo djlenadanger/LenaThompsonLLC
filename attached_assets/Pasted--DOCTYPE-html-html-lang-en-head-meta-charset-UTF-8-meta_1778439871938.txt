@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>What I'm Working On — Lena Thompson LLC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #0d0d0b;
+  --bg2: #141412;
+  --bg3: #1c1c19;
+  --border: rgba(255,255,255,0.07);
+  --border-hover: rgba(255,255,255,0.15);
+  --text: #e8e4db;
+  --text-muted: #7a7870;
+  --text-dim: #4a4843;
+  --amber: #e8a820;
+  --amber-dim: #7a5810;
+  --amber-bg: rgba(232,168,32,0.08);
+  --teal: #2dd4a0;
+  --teal-bg: rgba(45,212,160,0.07);
+  --coral: #e8785a;
+  --coral-bg: rgba(232,120,90,0.07);
+  --blue: #5a9de8;
+  --blue-bg: rgba(90,157,232,0.07);
+  --purple: #9b87e8;
+  --purple-bg: rgba(155,135,232,0.07);
+  --green: #7ac96a;
+  --green-bg: rgba(122,201,106,0.07);
+  --font-display: 'DM Serif Display', serif;
+  --font-sans: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+  --r: 8px;
+  --r-lg: 14px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+background: var(–bg);
+color: var(–text);
+font-family: var(–font-sans);
+font-size: 15px;
+line-height: 1.65;
+min-height: 100vh;
+}
+
+/* Grain overlay */
+body::before {
+content: ‘’;
+position: fixed;
+inset: 0;
+background-image: url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 256 256’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘noise’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.9’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23noise)’ opacity=‘0.04’/%3E%3C/svg%3E”);
+pointer-events: none;
+z-index: 0;
+opacity: 0.5;
+}
+
+.wrap {
+position: relative;
+z-index: 1;
+max-width: 860px;
+margin: 0 auto;
+padding: 3.5rem 2rem 5rem;
+}
+
+/* Header */
+header {
+border-bottom: 0.5px solid var(–border);
+padding-bottom: 2rem;
+margin-bottom: 2.5rem;
+}
+
+.eyebrow {
+font-family: var(–font-mono);
+font-size: 11px;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(–amber);
+margin-bottom: 0.75rem;
+display: flex;
+align-items: center;
+gap: 8px;
+}
+
+.live-dot {
+width: 6px;
+height: 6px;
+border-radius: 50%;
+background: var(–amber);
+animation: pulse 2s ease-in-out infinite;
+flex-shrink: 0;
+}
+
+@keyframes pulse {
+0%, 100% { opacity: 1; transform: scale(1); }
+50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+h1 {
+font-family: var(–font-display);
+font-size: clamp(2.2rem, 5vw, 3.2rem);
+font-weight: 400;
+color: var(–text);
+line-height: 1.15;
+margin-bottom: 0.75rem;
+}
+
+h1 em {
+color: var(–amber);
+font-style: italic;
+}
+
+.header-sub {
+font-size: 14px;
+color: var(–text-muted);
+max-width: 480px;
+line-height: 1.6;
+}
+
+.header-sub a {
+color: var(–amber);
+text-decoration: none;
+border-bottom: 0.5px solid var(–amber-dim);
+}
+
+.header-sub a:hover { border-color: var(–amber); }
+
+/* Section label */
+.section-label {
+font-family: var(–font-mono);
+font-size: 10px;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(–text-dim);
+margin-bottom: 1rem;
+}
+
+/* Activity log */
+.activity-section { margin-bottom: 3rem; }
+
+.activity-log {
+border: 0.5px solid var(–border);
+border-radius: var(–r-lg);
+overflow: hidden;
+background: var(–bg2);
+}
+
+.activity-item {
+display: grid;
+grid-template-columns: 90px 1fr;
+gap: 0;
+border-bottom: 0.5px solid var(–border);
+transition: background 0.15s;
+}
+
+.activity-item:last-child { border-bottom: none; }
+.activity-item:hover { background: var(–bg3); }
+
+.activity-date {
+font-family: var(–font-mono);
+font-size: 10px;
+color: var(–text-dim);
+padding: 14px 16px;
+border-right: 0.5px solid var(–border);
+display: flex;
+flex-direction: column;
+gap: 2px;
+letter-spacing: 0.04em;
+line-height: 1.4;
+}
+
+.activity-date .day {
+color: var(–amber);
+font-size: 11px;
+font-weight: 500;
+}
+
+.activity-body { padding: 14px 18px; }
+
+.activity-title {
+font-size: 14px;
+font-weight: 500;
+color: var(–text);
+margin-bottom: 3px;
+line-height: 1.4;
+}
+
+.activity-title a {
+color: var(–text);
+text-decoration: none;
+border-bottom: 0.5px solid var(–border-hover);
+transition: color 0.15s, border-color 0.15s;
+}
+
+.activity-title a:hover { color: var(–amber); border-color: var(–amber); }
+
+.activity-detail {
+font-size: 12px;
+color: var(–text-muted);
+line-height: 1.5;
+}
+
+.tag {
+display: inline-block;
+font-family: var(–font-mono);
+font-size: 10px;
+padding: 1px 7px;
+border-radius: 20px;
+margin-right: 4px;
+font-weight: 500;
+vertical-align: middle;
+}
+
+.tag-amber  { background: var(–amber-bg);  color: var(–amber); }
+.tag-teal   { background: var(–teal-bg);   color: var(–teal); }
+.tag-coral  { background: var(–coral-bg);  color: var(–coral); }
+.tag-blue   { background: var(–blue-bg);   color: var(–blue); }
+.tag-purple { background: var(–purple-bg); color: var(–purple); }
+.tag-green  { background: var(–green-bg);  color: var(–green); }
+
+/* Project board */
+.projects-section { margin-bottom: 3rem; }
+
+.project-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+gap: 10px;
+}
+
+.project-card {
+background: var(–bg2);
+border: 0.5px solid var(–border);
+border-radius: var(–r-lg);
+padding: 16px 18px;
+transition: border-color 0.15s, background 0.15s;
+position: relative;
+overflow: hidden;
+}
+
+.project-card::before {
+content: ‘’;
+position: absolute;
+top: 0; left: 0;
+width: 3px;
+height: 100%;
+}
+
+.project-card.amber::before { background: var(–amber); }
+.project-card.teal::before  { background: var(–teal); }
+.project-card.coral::before { background: var(–coral); }
+.project-card.blue::before  { background: var(–blue); }
+.project-card.purple::before{ background: var(–purple); }
+.project-card.green::before { background: var(–green); }
+
+.project-card:hover {
+border-color: var(–border-hover);
+background: var(–bg3);
+}
+
+.project-header {
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+margin-bottom: 8px;
+}
+
+.project-title {
+font-size: 13px;
+font-weight: 500;
+color: var(–text);
+line-height: 1.4;
+flex: 1;
+}
+
+.project-title a {
+color: var(–text);
+text-decoration: none;
+}
+
+.project-title a:hover { color: var(–amber); }
+
+.project-status {
+font-family: var(–font-mono);
+font-size: 9px;
+letter-spacing: 0.08em;
+text-transform: uppercase;
+padding: 2px 6px;
+border-radius: 20px;
+margin-left: 8px;
+flex-shrink: 0;
+}
+
+.status-active   { background: var(–amber-bg); color: var(–amber); }
+.status-building { background: var(–teal-bg);  color: var(–teal); }
+.status-ongoing  { background: var(–purple-bg);color: var(–purple); }
+.status-shipped  { background: var(–green-bg); color: var(–green); }
+
+.project-desc {
+font-size: 12px;
+color: var(–text-muted);
+line-height: 1.55;
+}
+
+/* Progress bar */
+.progress-wrap {
+margin-top: 10px;
+height: 2px;
+background: var(–border);
+border-radius: 2px;
+overflow: hidden;
+}
+
+.progress-bar {
+height: 100%;
+border-radius: 2px;
+background: var(–amber);
+}
+
+.progress-label {
+font-family: var(–font-mono);
+font-size: 10px;
+color: var(–text-dim);
+margin-top: 4px;
+}
+
+/* Substack callout */
+.substack-callout {
+margin-top: 2rem;
+background: var(–bg2);
+border: 0.5px solid var(–border);
+border-radius: var(–r-lg);
+padding: 20px 22px;
+display: flex;
+align-items: flex-start;
+gap: 16px;
+}
+
+.callout-icon {
+width: 36px;
+height: 36px;
+border-radius: 8px;
+background: var(–amber-bg);
+border: 0.5px solid var(–amber-dim);
+display: flex;
+align-items: center;
+justify-content: center;
+flex-shrink: 0;
+font-size: 16px;
+}
+
+.callout-title {
+font-size: 13px;
+font-weight: 500;
+color: var(–text);
+margin-bottom: 3px;
+}
+
+.callout-sub {
+font-size: 12px;
+color: var(–text-muted);
+line-height: 1.5;
+}
+
+.callout-sub a {
+color: var(–amber);
+text-decoration: none;
+border-bottom: 0.5px solid var(–amber-dim);
+}
+
+.callout-sub a:hover { border-color: var(–amber); }
+
+/* Footer */
+footer {
+border-top: 0.5px solid var(–border);
+padding-top: 1.5rem;
+display: flex;
+align-items: center;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 10px;
+}
+
+.footer-left {
+font-family: var(–font-mono);
+font-size: 11px;
+color: var(–text-dim);
+}
+
+.footer-left a {
+color: var(–text-muted);
+text-decoration: none;
+}
+
+.footer-left a:hover { color: var(–amber); }
+
+.footer-right {
+font-family: var(–font-mono);
+font-size: 11px;
+color: var(–text-dim);
+}
+
+/* Animations */
+.fade-up {
+opacity: 0;
+transform: translateY(12px);
+animation: fadeUp 0.5s ease forwards;
+}
+
+.fade-up:nth-child(1) { animation-delay: 0.05s; }
+.fade-up:nth-child(2) { animation-delay: 0.10s; }
+.fade-up:nth-child(3) { animation-delay: 0.15s; }
+.fade-up:nth-child(4) { animation-delay: 0.20s; }
+.fade-up:nth-child(5) { animation-delay: 0.25s; }
+.fade-up:nth-child(6) { animation-delay: 0.30s; }
+.fade-up:nth-child(7) { animation-delay: 0.35s; }
+
+@keyframes fadeUp {
+to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+.wrap { padding: 2rem 1.25rem 4rem; }
+.activity-item { grid-template-columns: 70px 1fr; }
+.project-grid { grid-template-columns: 1fr; }
+footer { flex-direction: column; }
+}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+
+  <header class="fade-up">
+    <div class="eyebrow">
+      <span class="live-dot"></span>
+      Lena Thompson LLC — Active work log
+    </div>
+    <h1>What I'm<br/><em>working on.</em></h1>
+    <p class="header-sub">
+      I build, break, secure, and document things. This is a live snapshot of what's in progress —
+      from infrastructure and security research to web projects and community education.
+      Follow along on <a href="https://substack.com" target="_blank">Substack</a>.
+    </p>
+  </header>
+
+  <!-- Recent Activity -->
+
+  <section class="activity-section fade-up">
+    <div class="section-label">// recent activity</div>
+    <div class="activity-log">
+
+```
+  <div class="activity-item">
+    <div class="activity-date">
+      <span class="day">Today</span>
+      <span>Apr 27</span>
+      <span>2026</span>
+    </div>
+    <div class="activity-body">
+      <div class="activity-title">Rayhunter deployed — IMSI catcher activity detected</div>
+      <div class="activity-detail">
+        <span class="tag tag-coral">RF Security</span>
+        <span class="tag tag-green">Shipped</span>
+        Installed Rayhunter v0.10.2 on an Orbic RC400L via Kali. Old SIM triggered 3 warnings: IMSI/IMEI requested in suspicious manner, connection dropped without Auth Accept (packet 666) — behavior consistent with a Stingray/IMSI catcher. Swapped to a fresh SIM: zero warnings. Finding documented.
+      </div>
+    </div>
+  </div>
+
+  <div class="activity-item">
+    <div class="activity-date">
+      <span class="day">Apr 11</span>
+      <span>2026</span>
+    </div>
+    <div class="activity-body">
+      <div class="activity-title">Tailscale Exit Node configured</div>
+      <div class="activity-detail">
+        <span class="tag tag-amber">Networking</span>
+        <span class="tag tag-teal">Infrastructure</span>
+        Set up an exit node for secure remote access — next step: deploy on the Raspberry Pi surveillance build.
+      </div>
+    </div>
+  </div>
+
+  <div class="activity-item">
+    <div class="activity-date">
+      <span class="day">Yesterday</span>
+      <span>Apr 10</span>
+      <span>2026</span>
+    </div>
+    <div class="activity-body">
+      <div class="activity-title">
+        <a href="https://mdp-spring-convention-2026.replit.app" target="_blank">MDP Spring Convention 2026 site launched ↗</a>
+      </div>
+      <div class="activity-detail">
+        <span class="tag tag-blue">Web Dev</span>
+        <span class="tag tag-green">Shipped</span>
+        Built and deployed a full convention site on Replit. Approved by the chair — live and shareable.
+      </div>
+    </div>
+  </div>
+
+  <div class="activity-item">
+    <div class="activity-date">
+      <span class="day">Recent</span>
+      <span>Apr 2026</span>
+    </div>
+    <div class="activity-body">
+      <div class="activity-title">seniorconnect.app migrated to Hostinger VPS</div>
+      <div class="activity-detail">
+        <span class="tag tag-amber">Cloud</span>
+        <span class="tag tag-coral">Security</span>
+        Moved production app from shared hosting to a self-managed VPS. Full deployment + configuration ownership.
+      </div>
+    </div>
+  </div>
+
+  <div class="activity-item">
+    <div class="activity-date">
+      <span class="day">Published</span>
+      <span>Mar 2026</span>
+    </div>
+    <div class="activity-body">
+      <div class="activity-title">Substack: "Breaking Things on Purpose"</div>
+      <div class="activity-detail">
+        <span class="tag tag-purple">Writing</span>
+        First article in my security + development series. Documenting the real process of building and breaking things intentionally.
+      </div>
+    </div>
+  </div>
+
+</div>
+```
+
+  </section>
+
+  <!-- Active Projects -->
+
+  <section class="projects-section fade-up">
+    <div class="section-label">// active tracks</div>
+    <div class="project-grid">
+
+```
+  <div class="project-card green">
+    <div class="project-header">
+      <div class="project-title">Rayhunter — Stingray / IMSI catcher detector</div>
+      <span class="project-status status-shipped">Shipped</span>
+    </div>
+    <div class="project-desc">
+      Installed Rayhunter v0.10.2 on an Orbic RC400L via Kali. Old SIM: 3 warnings — IMSI/IMEI requested in suspicious manner, connection dropped without Auth Accept (packet 666). Fresh SIM: zero warnings. Behavior consistent with IMSI catcher. Finding documented.
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-bar" style="width: 100%; background: var(--green);"></div>
+    </div>
+    <div class="progress-label">Install · Test · Finding confirmed</div>
+  </div>
+
+  <div class="project-card coral">
+    <div class="project-header">
+      <div class="project-title">seniorconnect.app security audit</div>
+      <span class="project-status status-active">Active</span>
+    </div>
+    <div class="project-desc">
+      Testing 20 vulnerabilities using Kali Linux on a VPS. Documenting every step as security research content.
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-bar" style="width: 15%; background: var(--coral);"></div>
+    </div>
+    <div class="progress-label">3 / 20 vulns tested</div>
+  </div>
+
+  <div class="project-card teal">
+    <div class="project-header">
+      <div class="project-title">Raspberry Pi surveillance system</div>
+      <span class="project-status status-building">Building</span>
+    </div>
+    <div class="project-desc">
+      Multi-month hardware + software build. Planning Tailscale integration for secure remote access. Full build log incoming.
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-bar" style="width: 10%; background: var(--teal);"></div>
+    </div>
+    <div class="progress-label">Phase 1 of 5 — networking layer</div>
+  </div>
+
+  <div class="project-card blue">
+    <div class="project-header">
+      <div class="project-title">PortSwigger Web Security labs</div>
+      <span class="project-status status-active">Active</span>
+    </div>
+    <div class="project-desc">
+      Working through the apprentice track. 11 labs remaining — findings will feed into Substack and content library.
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-bar" style="width: 55%; background: var(--blue);"></div>
+    </div>
+    <div class="progress-label">11 labs remaining</div>
+  </div>
+
+  <div class="project-card purple">
+    <div class="project-header">
+      <div class="project-title">Safe &amp; Secure Online webinar series</div>
+      <span class="project-status status-building">Building</span>
+    </div>
+    <div class="project-desc">
+      Designing practical digital safety workshops for seniors. Covers phishing, passwords, privacy, and safe browsing.
+    </div>
+  </div>
+
+  <div class="project-card amber">
+    <div class="project-header">
+      <div class="project-title">LLC site + resume update</div>
+      <span class="project-status status-active">Active</span>
+    </div>
+    <div class="project-desc">
+      Adding Design &amp; Development and Cloud Management to reflect VPS work, app deployment, and recent projects.
+    </div>
+  </div>
+
+  <div class="project-card green">
+    <div class="project-header">
+      <div class="project-title">djslradio.com media refresh</div>
+      <span class="project-status status-ongoing">Ongoing</span>
+    </div>
+    <div class="project-desc">
+      Updating media assets and files via FTP. Keeping the site current between larger projects.
+    </div>
+  </div>
+
+</div>
+```
+
+  </section>
+
+  <!-- Substack callout -->
+
+  <div class="substack-callout fade-up">
+    <div class="callout-icon">✍</div>
+    <div>
+      <div class="callout-title">I write about all of this</div>
+      <div class="callout-sub">
+        Security research, building in public, and making tech accessible —
+        follow <a href="https://substack.com" target="_blank">Breaking Things on Purpose on Substack</a>
+        for the full documentation as it happens.
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+
+  <footer class="fade-up" style="margin-top: 3rem;">
+    <div class="footer-left">
+      <a href="https://lenathompsonllc.com">lenathompsonllc.com</a>
+      &nbsp;·&nbsp; Updated April 2026
+    </div>
+    <div class="footer-right">
+      &copy; 2026 Lena Thompson LLC
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

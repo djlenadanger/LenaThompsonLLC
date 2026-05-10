@@ -756,8 +756,19 @@ const statusStyles: Record<string, { bg: string; color: string }> = {
 const activityLog = [
   {
     day: "Today",
-    date: "Apr 11",
+    date: "Apr 27",
     year: "2026",
+    title: "Rayhunter deployed — IMSI catcher activity detected",
+    tags: [
+      { label: "RF Security", color: "coral" },
+      { label: "Shipped", color: "green" },
+    ],
+    detail: "Installed Rayhunter v0.10.2 on an Orbic RC400L via Kali. Old SIM triggered 3 warnings: IMSI/IMEI requested in suspicious manner, connection dropped without Auth Accept (packet 666) — behavior consistent with a Stingray/IMSI catcher. Swapped to a fresh SIM: zero warnings. Finding documented.",
+  },
+  {
+    day: "Apr 11",
+    date: "2026",
+    year: "",
     title: "Tailscale Exit Node configured",
     tags: [
       { label: "Networking", color: "amber" },
@@ -766,9 +777,9 @@ const activityLog = [
     detail: "Set up an exit node for secure remote access — next step: deploy on the Raspberry Pi surveillance build.",
   },
   {
-    day: "Yesterday",
-    date: "Apr 10",
-    year: "2026",
+    day: "Apr 10",
+    date: "2026",
+    year: "",
     title: "MDP Spring Convention 2026 site launched",
     link: "https://mdp-spring-convention-2026.replit.app",
     tags: [
@@ -799,6 +810,14 @@ const activityLog = [
 ];
 
 const activeProjects = [
+  {
+    title: "Rayhunter — Stingray / IMSI catcher detector",
+    status: "Shipped",
+    color: "green",
+    desc: "Installed Rayhunter v0.10.2 on an Orbic RC400L via Kali. Old SIM: 3 warnings consistent with an IMSI catcher. Fresh SIM: zero warnings. Finding documented.",
+    progress: 100,
+    progressLabel: "Install · Test · Finding confirmed",
+  },
   {
     title: "seniorconnect.app security audit",
     status: "Active",
