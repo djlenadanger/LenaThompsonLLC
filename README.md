@@ -31,6 +31,6 @@ Professional landing page for Lena Thompson LLC with a futuristic, technical, me
 
 ## Contact Info
 - Email: lena@lenathompsonllc.com
-- Phone: 313-282-4396
+- Phone: 313-389-6249
 - LinkedIn: linkedin.com/in/lenathompsonllc
 - Portfolio: djlenadanger.github.io
