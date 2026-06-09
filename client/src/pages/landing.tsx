@@ -1045,7 +1045,7 @@ function BookingSection() {
       const el = document.querySelector(".calendly-inline-widget");
       if (el && (window as any).Calendly) {
         (window as any).Calendly.initInlineWidget({
-          url: "https://calendly.com/d/y7b-8kp-5sy/initial-consultation-call?background_color=0a0c14&text_color=c8d0e0&primary_color=00d4a4",
+          url: "https://calendly.com/lenadanger/zoom-meeting-clone?background_color=0a0c14&text_color=c8d0e0&primary_color=00d4a4",
           parentElement: el,
         });
       }
