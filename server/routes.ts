@@ -7,6 +7,11 @@ export async function registerRoutes(
   httpServer: Server,
   app: Express
 ): Promise<Server> {
+  // Redirect .html variants to canonical clean URLs
+  app.get("/index.html", (_req, res) => res.redirect(301, "/"));
+  app.get("/services.html", (_req, res) => res.redirect(301, "/services"));
+  app.get("/work_log.html", (_req, res) => res.redirect(301, "/work_log"));
+
   // Serve the services pricing page at /services
   app.get("/services", (req, res) => {
     const servicesFile =

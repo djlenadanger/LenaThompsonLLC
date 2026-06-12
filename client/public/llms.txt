@@ -1,0 +1,17 @@
+# Lena Thompson LLC
+
+> SANS-certified cybersecurity consultant and app developer based in Cheboygan, MI. Specializing in penetration testing, web and mobile app security, custom app development, and digital safety training for small businesses and seniors.
+
+## Pages
+
+- [Home](https://lenathompsonllc.com/): Landing page with service overview, pricing, credentials, active work log, and contact information.
+- [Services & Pricing](https://lenathompsonllc.com/services): Flat-rate pricing for web app security testing, mobile security, network recon, security awareness training, and web design packages.
+- [Work Log](https://lenathompsonllc.com/work_log): Live snapshot of active security research, infrastructure builds, and development projects — including IMSI catcher research, Raspberry Pi surveillance builds, and PortSwigger lab work.
+
+## Contact
+
+- Email: lena@lenathompsonllc.com
+- Phone: 313-389-6249
+- LinkedIn: https://www.linkedin.com/in/lenathompsonllc
+- Portfolio: https://djlenadanger.github.io
+- Substack: https://djlena.substack.com

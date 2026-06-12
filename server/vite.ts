@@ -34,6 +34,9 @@ export async function setupVite(server: Server, app: Express) {
   app.use("/{*path}", async (req, res, next) => {
     const url = req.originalUrl;
 
+    // Only serve the SPA shell for the root route; return 404 for everything else
+    const status = req.path === "/" ? 200 : 404;
+
     try {
       const clientTemplate = path.resolve(
         import.meta.dirname,
@@ -49,7 +52,7 @@ export async function setupVite(server: Server, app: Express) {
         `src="/src/main.tsx?v=${nanoid()}"`,
       );
       const page = await vite.transformIndexHtml(url, template);
-      res.status(200).set({ "Content-Type": "text/html" }).end(page);
+      res.status(status).set({ "Content-Type": "text/html" }).end(page);
     } catch (e) {
       vite.ssrFixStacktrace(e as Error);
       next(e);

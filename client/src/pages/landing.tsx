@@ -88,6 +88,7 @@ function Navbar() {
           <a href="#work" className="px-3 py-1.5 text-muted-foreground rounded-sm" data-testid="link-work">_WORK</a>
           <a href="#booking" className="px-3 py-1.5 text-muted-foreground rounded-sm" data-testid="link-booking">_SCHEDULE</a>
           <a href="#contact" className="px-3 py-1.5 text-muted-foreground rounded-sm" data-testid="link-contact">_CONTACT</a>
+          <a href="/work_log" className="px-3 py-1.5 text-muted-foreground rounded-sm" data-testid="link-work-log">_LOG</a>
         </div>
         <Button size="sm" asChild data-testid="button-get-in-touch">
           <a href="#contact" className="font-mono text-xs tracking-wider">CONNECT</a>
@@ -1267,9 +1268,10 @@ function Footer() {
             Lena Thompson <span className="text-primary">LLC</span>
           </span>
         </div>
-        <p className="text-[10px] text-muted-foreground font-mono tracking-wider">
-          CHEBOYGAN, MI // CYBERSECURITY // APP_DEV // TRAINING
-        </p>
+        <div className="flex items-center gap-4 text-[10px] font-mono tracking-wider">
+          <a href="/services" className="text-muted-foreground hover:text-primary transition-colors" data-testid="footer-link-services">SERVICES &amp; PRICING</a>
+          <a href="/work_log" className="text-muted-foreground hover:text-primary transition-colors" data-testid="footer-link-work-log">WORK LOG</a>
+        </div>
         <p className="text-[10px] text-muted-foreground font-mono tracking-wider">
           &copy; {new Date().getFullYear()} LENA_THOMPSON_LLC
         </p>
