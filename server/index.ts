@@ -1,4 +1,5 @@
 import express, { type Request, Response, NextFunction } from "express";
+import helmet from "helmet";
 import { registerRoutes } from "./routes";
 import { serveStatic } from "./static";
 import { createServer } from "http";
@@ -12,6 +13,7 @@ declare module "http" {
   }
 }
 
+app.use(helmet());
 app.use(
   express.json({
     verify: (req, _res, buf) => {
